@@ -40,7 +40,7 @@ if (!fs.pathExistsSync('/app/nginx/nginx.conf')) {
 }
 
 const main = async () => {
-  spawnSync(`/usr/sbin/nginx -c /app/nginx/nginx.conf`, spawnOpts);
+  //spawnSync(`/usr/sbin/nginx -c /app/nginx/nginx.conf`, spawnOpts);
   spawn(`npx crw s ${process.env.INIT ? '--init' : ''}`, spawnOpts);
 };
 
