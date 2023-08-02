@@ -1,7 +1,7 @@
 FROM node:16-alpine
 
-COPY ./cromwell /app
-COPY ./nginx.conf /app/nginx.conf
+COPY . /app
+COPY ./docker/nginx.conf /app/nginx.conf
 
 RUN apk add --no-cache python3
 RUN apk add nginx --update-cache \
@@ -16,5 +16,5 @@ RUN apk add nginx --update-cache \
     && rm -rf /app/.cromwell/manager
 
 VOLUME ["/app/public", "/app/nginx", "/app/.cromwell/server", "/app/.cromwell/logs"]
-EXPOSE 80
+EXPOSE 80 4016
 CMD  cd app && node entrypoint.js
