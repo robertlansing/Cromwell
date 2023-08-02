@@ -48,7 +48,7 @@ const main = async () => {
     if (fs.pathExistsSync(nextTempBuildDir)) fs.removeSync(nextTempBuildDir);
     if (fs.pathExistsSync(nextBuildDir)) fs.removeSync(nextBuildDir);
 
-    spawnSync('npx --no-install next build', [], { shell: true, stdio: 'inherit', cwd: __dirname });
+    spawnSync('npx --no-install next build --no-lint', [], { shell: true, stdio: 'inherit', cwd: __dirname });
 
     setTimeout(() => {
       if (fs.pathExistsSync(join(nextTempBuildDir, 'BUILD_ID'))) {
@@ -155,6 +155,7 @@ const main = async () => {
   }
 };
 
-main().catch(() => {
+main().catch((e) => {
+  logger.error(e);
   if (process.send) process.send(adminPanelMessages.onStartErrorMessage);
 });
